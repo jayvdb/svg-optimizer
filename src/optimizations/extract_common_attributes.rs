@@ -62,6 +62,7 @@ fn extract_common_attributes_from_node(node: Node) -> Node {
             let common_attributes = find_common_attributes(&children);
             let children = remove_common_attributes(children, &common_attributes);
 
+            // Remove any existing attributes that will be replaced by common attributes
             attributes.retain(|attr| {
                 !common_attributes
                     .iter()

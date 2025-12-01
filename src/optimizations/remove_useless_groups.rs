@@ -91,6 +91,8 @@ fn merge_attributes(
     parent: Vec<OwnedAttribute>,
     mut child: Vec<OwnedAttribute>,
 ) -> Vec<OwnedAttribute> {
+    // Add parent attributes that don't conflict with child attributes
+    // Child attributes take precedence
     for parent_attr in parent {
         if !child.iter().any(|attr| attr.name == parent_attr.name) {
             child.push(parent_attr);
