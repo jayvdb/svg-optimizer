@@ -67,112 +67,119 @@ macro_rules! use_optimizations {
 }
 
 use_optimizations!(
-    [[
-        remove_attribute_whitespace,
-        no_remove_attribute_whitespace,
-        "Remove excess whitespace from attributes.",
+    [
+        [
+            remove_attribute_whitespace,
+            no_remove_attribute_whitespace,
+            "Remove excess whitespace from attributes.",
+        ],
+        [
+            remove_whitespace_outside_tags,
+            no_remove_whitespace_outside_tags,
+            "Remove excess whitespace from outside of tags. Leaves whitespace between `<text>` tags, as it may be rendered.",
+        ],
+        [
+            ellipses_to_circles,
+            no_ellipses_to_circles,
+            "Convert ellipses to circles if their `rx` and `ry` are equal.",
+        ],
+        [remove_comments, no_remove_comments, "Remove all comments.",],
+        [
+            remove_descriptions,
+            no_remove_descriptions,
+            "Remove `<title>`, `<metadata>`, `<desc>` tags and their contents.",
+        ],
+        [
+            remove_useless_groups,
+            no_remove_useless_groups,
+            "Remove groups that contain a single node or no nodes.",
+        ],
+        [
+            remove_empty_attributes,
+            no_remove_empty_attributes,
+            "Remove attributes whose value is an empty string.",
+        ],
+        [
+            remove_empty_texts,
+            no_remove_empty_texts,
+            "Remove empty `<text>`, `<tspan>`, `<tref>` tags.",
+        ],
+        [
+            shorten_ids,
+            no_shorten_ids,
+            "Convert id names to be as short as possible. New names will only be created from latin alphabet letters and digits.",
+        ],
+        [
+            remove_useless_ids,
+            no_remove_useless_ids,
+            "Removed unused ids.",
+        ],
+        [
+            sort_attributes,
+            no_sort_attributes,
+            "Sorts attributes by name.",
+        ],
+        [
+            extract_common_attributes,
+            no_extract_common_attributes,
+            "Extract common attributes in a group into the group.",
+        ],
+        [
+            remove_unused_defs,
+            no_remove_unused_defs,
+            "Remove defined objects which are not used anywhere.",
+        ],
+        [
+            remove_dimensions,
+            no_remove_dimensions,
+            "Remove width and height if they are equal to values in viewBox.",
+        ],
+        [
+            remove_empty_containers,
+            no_remove_empty_containers,
+            "Remove empty container elements.",
+        ],
+        [
+            remove_hidden_elements,
+            no_remove_hidden_elements,
+            "Remove elements which would not be rendered.",
+        ],
+        [
+            remove_useless_stroke_and_fill,
+            no_remove_useless_stroke_and_fill,
+            "Remove fill and stroke attributes which would not be rendered.",
+        ],
+        [
+            convert_paths_to_uses,
+            no_convert_paths_to_uses,
+            "Replace identical paths with `<use>`s of a single path.",
+        ],
+        [
+            remove_editor_namespace_data,
+            no_remove_editor_namespace_data,
+            "Remove editor namespaces, elements and attributes.",
+        ],
+        [
+            merge_consecutive_paths,
+            no_merge_consecutive_paths,
+            "Merge consecutive paths if their attributes match.",
+        ],
+        [
+            remove_rough_style,
+            no_remove_rough_style,
+            "Remove Mermaid.js rough-style duplicate paths to normalize output.",
+        ]
     ],
     [
-        remove_whitespace_outside_tags,
-        no_remove_whitespace_outside_tags,
-        "Remove excess whitespace from outside of tags. Leaves whitespace between `<text>` tags, as it may be rendered.",
-    ],
-    [
-        ellipses_to_circles,
-        no_ellipses_to_circles,
-        "Convert ellipses to circles if their `rx` and `ry` are equal.",
-    ],
-    [
-        remove_comments,
-        no_remove_comments,
-        "Remove all comments.",
-    ],
-    [
-        remove_descriptions,
-        no_remove_descriptions,
-        "Remove `<title>`, `<metadata>`, `<desc>` tags and their contents.",
-    ],
-    [
-        remove_useless_groups,
-        no_remove_useless_groups,
-        "Remove groups that contain a single node or no nodes.",
-    ],
-    [
-        remove_empty_attributes,
-        no_remove_empty_attributes,
-        "Remove attributes whose value is an empty string.",
-    ],
-    [
-        remove_empty_texts,
-        no_remove_empty_texts,
-        "Remove empty `<text>`, `<tspan>`, `<tref>` tags.",
-    ],
-    [
-        shorten_ids,
-        no_shorten_ids,
-        "Convert id names to be as short as possible. New names will only be created from latin alphabet letters and digits.",
-    ],
-    [
-        remove_useless_ids,
-        no_remove_useless_ids,
-        "Removed unused ids.",
-    ],
-    [
-        sort_attributes,
-        no_sort_attributes,
-        "Sorts attributes by name.",
-    ],
-    [
-        extract_common_attributes,
-        no_extract_common_attributes,
-        "Extract common attributes in a group into the group.",
-    ],
-    [
-        remove_unused_defs,
-        no_remove_unused_defs,
-        "Remove defined objects which are not used anywhere.",
-    ],
-    [
-        remove_dimensions,
-        no_remove_dimensions,
-        "Remove width and height if they are equal to values in viewBox.",
-    ],
-    [
-        remove_empty_containers,
-        no_remove_empty_containers,
-        "Remove empty container elements.",
-    ],
-    [
-        remove_hidden_elements,
-        no_remove_hidden_elements,
-        "Remove elements which would not be rendered.",
-    ],
-    [
-        remove_useless_stroke_and_fill,
-        no_remove_useless_stroke_and_fill,
-        "Remove fill and stroke attributes which would not be rendered.",
-    ],
-    [
-        convert_paths_to_uses,
-        no_convert_paths_to_uses,
-        "Replace identical paths with `<use>`s of a single path.",
-    ],
-    [
-        remove_editor_namespace_data,
-        no_remove_editor_namespace_data,
-        "Remove editor namespaces, elements and attributes.",
-    ],
-    [
-        merge_consecutive_paths,
-        no_merge_consecutive_paths,
-        "Merge consecutive paths if their attributes match.",
-    ]], [[
-        round_floats,
-        "Round floating point numbers to specified precision (disabled by default).",
-    ], [
-        merge_transforms,
-        "Merge transform attribute components into one matrix (disabled by default).",
-    ]]
+        [
+            round_floats,
+            "Round floating point numbers to specified precision (disabled by default).",
+        ],
+        [
+            merge_transforms,
+            "Merge transform attribute components into one matrix (disabled by default).",
+        ]
+    ]
 );
 
 #[cfg(test)]
