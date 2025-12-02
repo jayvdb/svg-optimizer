@@ -17,6 +17,17 @@ fn is_only_child_used(only_child: &Node, used_ids: &[String]) -> bool {
     false
 }
 
+fn should_preserve_group(attributes: &[OwnedAttribute]) -> bool {
+    // Preserve groups with certain classes that are semantically important
+    // e.g., Mermaid.js uses class="edgeLabel" for arrow labels
+    if let Some(class_value) = find_attribute(attributes, "class") {
+        if class_value.contains("edgeLabel") {
+            return true;
+        }
+    }
+    false
+}
+
 fn remove_useless_groups_from_node(node: Node, used_ids: &[String]) -> Option<Node> {
     match node {
         Node::RegularNode {
@@ -30,7 +41,8 @@ fn remove_useless_groups_from_node(node: Node, used_ids: &[String]) -> Option<No
 
             match new_children.len() {
                 0 => None,
-                1 if !is_only_child_used(&new_children[0], used_ids) => Some(collapse_group(
+                1 if !is_only_child_used(&new_children[0], used_ids) 
+                    && !should_preserve_group(&parent_attr) => Some(collapse_group(
                     new_children.remove(0),
                     parent_namespace,
                     parent_attr,
