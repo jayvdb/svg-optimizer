@@ -166,6 +166,11 @@ use_optimizations!(
         merge_consecutive_paths,
         no_merge_consecutive_paths,
         "Merge consecutive paths if their attributes match.",
+    ],
+    [
+        remove_rough_style,
+        no_remove_rough_style,
+        "Remove Mermaid.js rough-style duplicate paths to normalize output.",
     ]], [[
         round_floats,
         "Round floating point numbers to specified precision (disabled by default).",
