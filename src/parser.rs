@@ -3,10 +3,10 @@ use anyhow::Result;
 use std::io::Read;
 use xml::name::OwnedName;
 use xml::{
+    EventReader,
     attribute::OwnedAttribute,
     namespace::Namespace,
-    reader::{ParserConfig2, XmlEvent},
-    EventReader,
+    reader::{ParserConfig, XmlEvent},
 };
 
 /// Parses input stream of events provided by xml library into the internal node tree format.
@@ -21,7 +21,7 @@ pub(crate) struct Parser<R: Read> {
 impl<R: Read> Parser<R> {
     pub(crate) fn new(source: R) -> Result<Self> {
         let mut parser = Parser {
-            source: ParserConfig2::new()
+            source: ParserConfig::new()
                 .ignore_comments(false)
                 .whitespace_to_characters(true)
                 .ignore_root_level_whitespace(false)
@@ -59,7 +59,7 @@ impl<R: Read> Parser<R> {
         }
 
         let node = match self.curr_event.take() {
-            Some(XmlEvent::StartDocument { .. }) => None,
+            Some(XmlEvent::StartDocument { .. } | XmlEvent::Doctype { .. }) => None,
             Some(XmlEvent::ProcessingInstruction { name, data }) => Some(Node::ChildlessNode {
                 node_type: ChildlessNodeType::ProcessingInstruction(name, data),
             }),
