@@ -15,7 +15,7 @@ fn get_dimensions(attributes: &[OwnedAttribute]) -> (Option<f64>, Option<f64>) {
     )
 }
 
-fn remove_dimensions_in_attributes(attributes: Vec<OwnedAttribute>) -> Vec<OwnedAttribute> {
+fn remove_dimensions_in_attributes(mut attributes: Vec<OwnedAttribute>) -> Vec<OwnedAttribute> {
     if let (Some(viewbox), (Some(width), Some(height))) = (
         find_attribute(&attributes, VIEWBOX_NAME),
         get_dimensions(&attributes),
@@ -23,7 +23,7 @@ fn remove_dimensions_in_attributes(attributes: Vec<OwnedAttribute>) -> Vec<Owned
         let expected_viewbox = format!("0 0 {width} {height}");
 
         if expected_viewbox == viewbox.split_whitespace().join(" ") {
-            return attributes.filter_to_vec(|attr| {
+            attributes.retain(|attr| {
                 let name = &attr.name.local_name;
                 name != WIDTH_NAME && name != HEIGHT_NAME
             });

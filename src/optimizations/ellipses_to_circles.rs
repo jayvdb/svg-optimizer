@@ -1,5 +1,5 @@
 use super::common::{
-    constants::{RX_NAME, RY_NAME, R_NAME},
+    constants::{R_NAME, RX_NAME, RY_NAME},
     iter::EasyIter,
 };
 use crate::node::{Node, NodeNamespace, RegularNodeType};
@@ -58,7 +58,7 @@ fn get_new_node(
                 value: rx.value.clone(),
             };
 
-            attributes = attributes.filter_to_vec(|attr| {
+            attributes.retain(|attr| {
                 let name = &attr.name.local_name;
                 name != RX_NAME && name != RY_NAME
             });

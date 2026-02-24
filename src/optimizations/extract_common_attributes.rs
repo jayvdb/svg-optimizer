@@ -30,8 +30,8 @@ fn find_common_attributes(nodes: &[Node]) -> Vec<OwnedAttribute> {
             }
         }
     }
+    common_attributes.retain(|attr| !NO_GROUP_ATTRIBUTES.contains(&attr.name.local_name.as_str()));
     common_attributes
-        .filter_to_vec(|attr| !NO_GROUP_ATTRIBUTES.contains(&attr.name.local_name.as_str()))
 }
 
 fn remove_common_attributes(nodes: Vec<Node>, common_attributes: &[OwnedAttribute]) -> Vec<Node> {
